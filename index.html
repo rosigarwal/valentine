@@ -19,34 +19,47 @@
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, var(--pink), var(--rose));
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             overflow: hidden;
-        }
-
-        .main-layout {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            width: 100%;
-            max-width: 1200px;
         }
 
         .container {
             text-align: center;
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(10px);
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
             z-index: 10;
         }
 
+        .gif-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .gif-group img {
+            width: 120px;
+            border-radius: 15px;
+        }
+
+        .celebration-layout {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            height: 100vh;
+        }
+
         .side-cat-img {
-            width: 250px;
+            width: 200px;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             animation: float 3s ease-in-out infinite;
@@ -57,25 +70,8 @@
             50% { transform: translateY(-15px); }
         }
 
-        h1 {
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .sub-text {
-            font-size: 1rem;
-            display: block;
-            margin-top: 10px;
-            opacity: 0.9;
-        }
-
-        .gif-container img {
-            width: 150px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
+        h1 { color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); font-size: 1.8rem; }
+        .sub-text { font-size: 1rem; display: block; margin-top: 5px; opacity: 0.9; }
 
         .buttons {
             display: flex;
@@ -83,6 +79,7 @@
             gap: 20px;
             position: relative;
             height: 60px;
+            margin-top: 20px;
         }
 
         button {
@@ -91,62 +88,49 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.2s;
             font-weight: bold;
         }
 
-        #yesBtn {
-            background-color: var(--dark-pink);
-            color: white;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
-        }
+        #yesBtn { background-color: var(--dark-pink); color: white; }
+        #noBtn { background-color: white; color: var(--dark-pink); position: absolute; right: 50px; }
 
-        #noBtn {
-            background-color: white;
-            color: var(--dark-pink);
-            position: absolute;
-            right: 50px;
-        }
-
-        .hidden { display: none; }
+        .hidden { display: none !important; }
 
         @media (max-width: 850px) {
-            .main-layout { flex-direction: column; }
-            .side-cat-img { width: 150px; }
+            .celebration-layout { flex-direction: column; overflow-y: auto; padding: 20px; }
+            .side-cat-img { width: 130px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-layout" id="firstPage">
-        <div class="container" id="mainCard">
-            <div class="gif-container">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bm93amZ4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute Bear">
+    <audio id="valentineMusic" loop playsinline>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="firstPage">
+        <div class="container">
+            <div class="gif-group">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bm93amZ4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Bear">
+                <img src="big-eye-cat.jpg" alt="Black Cat">
             </div>
-            <h1>
-                Will you be my Valentine? 💖
-                <span class="sub-text">(just click yesss plzzzz)</span>
-            </h1>
+            <h1>Will you be my Valentine? 💖 <span class="sub-text">(just click yesss plzzzz)</span></h1>
             <div class="buttons">
                 <button id="yesBtn" onclick="celebrate()">Yes!</button>
                 <button id="noBtn" onmouseover="moveButton()">No</button>
             </div>
         </div>
-        <img src="big-eye-cat.jpg" class="side-cat-img" alt="Cute Cat Side">
     </div>
 
-    <div id="celebrationWrapper" class="hidden" style="display:none; align-items: center; justify-content: center; gap: 20px; width: 100%;">
+    <div id="celebrationWrapper" class="celebration-layout">
         <img src="cats.jpg" class="side-cat-img" alt="Cats Left">
-        
         <div class="container">
-            <div class="gif-container">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bm93amZ4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/26FLdmIp6wJr91JAI/giphy.gif" alt="Happy Patrick">
+            <div class="gif-group">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bm93amZ4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/26FLdmIp6wJr91JAI/giphy.gif" alt="Patrick" style="width: 150px;">
             </div>
-                <h1 style="color: #ff4d6d;">yessssss lessss goooooooo cutuuuu 🥰🥰</h1>
-                <p style="color: white; font-weight: bold;">I knew you'd say yes! btw will try to come that side today after all today is 14th feb</p>
-            </div>
-
-
+            <h1 style="color: #ff4d6d;">yessssss lessss goooooooo cutuuuu 🥰🥰</h1>
+            <p style="color: white; font-weight: bold;">I knew you'd say yes! btw will try to come that side today after all today is 14th feb until then enjoy song 😅😽</p>
+        </div>
         <img src="cats.jpg" class="side-cat-img" alt="Cats Right">
     </div>
 
@@ -161,34 +145,18 @@
         }
 
         function celebrate() {
+            const music = document.getElementById('valentineMusic');
+            music.play().catch(e => console.log("Music blocked"));
+
             document.getElementById('firstPage').classList.add('hidden');
-            document.getElementById('firstPage').style.display = 'none';
-            
             const wrapper = document.getElementById('celebrationWrapper');
-            wrapper.classList.remove('hidden');
             wrapper.style.display = 'flex';
 
-            var end = Date.now() + (3 * 1000); 
-
+            var end = Date.now() + (5 * 1000); 
             (function frame() {
-                confetti({
-                    particleCount: 4,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff4d6d', '#ffafbd', '#ffffff']
-                });
-                confetti({
-                    particleCount: 4,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff4d6d', '#ffafbd', '#ffffff']
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
+                confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff4d6d', '#ffafbd', '#ffffff'] });
+                confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff4d6d', '#ffafbd', '#ffffff'] });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
             }());
         }
     </script>
