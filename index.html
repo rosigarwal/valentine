@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --pink: #ffafbd;
+            --rose: #ffc3a0;
+            --dark-pink: #ff4d6d;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--pink), var(--rose));
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .main-layout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 400px;
+            width: 90%;
+            z-index: 10;
+        }
+
+        .side-cat-img {
+            width: 250px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .sub-text {
+            font-size: 1rem;
+            display: block;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        .gif-container img {
+            width: 150px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 60px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+
+        #yesBtn {
+            background-color: var(--dark-pink);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        #noBtn {
+            background-color: white;
+            color: var(--dark-pink);
+            position: absolute;
+            right: 50px;
+        }
+
+        .hidden { display: none; }
+
+        @media (max-width: 850px) {
+            .main-layout { flex-direction: column; }
+            .side-cat-img { width: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-layout" id="firstPage">
+        <div class="container" id="mainCard">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bm93amZ4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute Bear">
+            </div>
+            <h1>
+                Will you be my Valentine? 💖
+                <span class="sub-text">(just click yesss plzzzz)</span>
+            </h1>
+            <div class="buttons">
+                <button id="yesBtn" onclick="celebrate()">Yes!</button>
+                <button id="noBtn" onmouseover="moveButton()">No</button>
+            </div>
+        </div>
+        <img src="big-eye-cat.jpg" class="side-cat-img" alt="Cute Cat Side">
+    </div>
+
+    <div id="celebrationWrapper" class="hidden" style="display:none; align-items: center; justify-content: center; gap: 20px; width: 100%;">
+        <img src="cats.jpg" class="side-cat-img" alt="Cats Left">
+        
+        <div class="container">
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIycXByZnd4bm93amZ4eXF4eXF4eXF4eXF4eXF4eXF4eXF4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/26FLdmIp6wJr91JAI/giphy.gif" alt="Happy Patrick">
+            </div>
+                <h1 style="color: #ff4d6d;">yessssss lessss goooooooo cutuuuu 🥰🥰</h1>
+                <p style="color: white; font-weight: bold;">I knew you'd say yes! btw will try to come that side today after all today is 14th feb</p>
+            </div>
+
+
+        <img src="cats.jpg" class="side-cat-img" alt="Cats Right">
+    </div>
+
+    <script>
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            document.getElementById('firstPage').classList.add('hidden');
+            document.getElementById('firstPage').style.display = 'none';
+            
+            const wrapper = document.getElementById('celebrationWrapper');
+            wrapper.classList.remove('hidden');
+            wrapper.style.display = 'flex';
+
+            var end = Date.now() + (3 * 1000); 
+
+            (function frame() {
+                confetti({
+                    particleCount: 4,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff4d6d', '#ffafbd', '#ffffff']
+                });
+                confetti({
+                    particleCount: 4,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff4d6d', '#ffafbd', '#ffffff']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+</html>
